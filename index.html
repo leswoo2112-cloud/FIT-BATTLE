@@ -10,130 +10,84 @@
 
   <meta
     name="theme-color"
-    content="#07111c"
+    content="#070b18"
   />
 
   <title>FIT BATTLE</title>
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <!-- =========================
-       상단 헤더
+       상단
   ========================== -->
   <header class="topbar">
-    <div class="brand">
-      <div class="brand-icon">⚡</div>
+    <div class="logo-area">
+      <span class="logo-icon">⚡</span>
 
       <div>
         <h1>FIT BATTLE</h1>
-        <p>재미있는 팀 웨이트 트레이닝</p>
+        <p>운동으로 점수를 획득해용!</p>
       </div>
     </div>
 
-    <div class="session-status">
-      <span id="sessionStatusBadge">
-        준비 중
-      </span>
+    <div class="top-stats">
+      <div class="stat-pill">
+        🪙
+        <strong id="totalScoreDisplay">0</strong>
+      </div>
 
-      <strong id="sessionTitleDisplay">
-        오늘의 웨이트 배틀
-      </strong>
-    </div>
+      <div class="stat-pill">
+        ⭐
+        <strong id="levelDisplay">1</strong>
+      </div>
 
-    <div class="topbar-actions">
       <button
         id="openSetupBtn"
-        class="secondary-btn"
+        class="small-btn"
         type="button"
       >
-        설정
-      </button>
-
-      <button
-        id="saveSessionBtn"
-        class="secondary-btn"
-        type="button"
-      >
-        저장
-      </button>
-
-      <button
-        id="resetSessionBtn"
-        class="danger-btn"
-        type="button"
-      >
-        초기화
+        ⚙️ 설정
       </button>
     </div>
   </header>
 
   <!-- =========================
-       하단·상단 내비게이션
+       왼쪽 메뉴
   ========================== -->
-  <nav class="main-nav">
+  <nav class="side-menu">
     <button
-      class="nav-btn active"
+      class="menu-btn active"
       type="button"
-      data-tab="homeSection"
+      data-page="battlePage"
     >
-      <span>🏠</span>
-      홈
+      <span>🎮</span>
+      배틀
     </button>
 
     <button
-      class="nav-btn"
+      class="menu-btn"
       type="button"
-      data-tab="circuitSection"
+      data-page="exercisePage"
     >
-      <span>⏱️</span>
-      서킷
+      <span>🏋️</span>
+      운동
     </button>
 
     <button
-      class="nav-btn"
+      class="menu-btn"
       type="button"
-      data-tab="randomSection"
-    >
-      <span>🎲</span>
-      랜덤
-    </button>
-
-    <button
-      class="nav-btn"
-      type="button"
-      data-tab="bingoSection"
-    >
-      <span>🎯</span>
-      빙고
-    </button>
-
-    <button
-      class="nav-btn"
-      type="button"
-      data-tab="missionSection"
-    >
-      <span>🤝</span>
-      협동
-    </button>
-
-    <button
-      class="nav-btn"
-      type="button"
-      data-tab="rankingSection"
+      data-page="rankingPage"
     >
       <span>🏆</span>
       순위
     </button>
 
     <button
-      class="nav-btn"
+      class="menu-btn"
       type="button"
-      data-tab="recordSection"
+      data-page="recordPage"
     >
       <span>📊</span>
       기록
@@ -141,1507 +95,559 @@
   </nav>
 
   <!-- =========================
-       설정 패널
+       메인
   ========================== -->
-  <aside
-    id="setupPanel"
-    class="setup-panel"
-  >
-    <div class="setup-header">
-      <div>
-        <span class="eyebrow">
-          SESSION SETUP
-        </span>
+  <main class="main">
+    <!-- =========================
+         배틀 화면
+    ========================== -->
+    <section
+      id="battlePage"
+      class="page active"
+    >
+      <div class="battle-grid">
+        <!-- 팀 점수판 -->
+        <section class="scoreboard card">
+          <div class="team team-blue">
+            <div class="team-logo">🐺</div>
 
-        <h2>운동 세션 설정</h2>
-      </div>
+            <div>
+              <span id="blueTeamNameDisplay">
+                블루팀
+              </span>
 
-      <button
-        id="closeSetupBtn"
-        class="icon-btn"
-        type="button"
-        aria-label="설정 닫기"
-      >
-        ✕
-      </button>
-    </div>
-
-    <div class="setup-grid">
-      <!-- 기본 세션 설정 -->
-      <section class="setup-card">
-        <div class="section-title">
-          <span>01</span>
-
-          <div>
-            <h3>기본 설정</h3>
-            <p>오늘 진행할 운동 정보를 입력해용.</p>
+              <strong id="blueTeamScoreDisplay">
+                0
+              </strong>
+            </div>
           </div>
-        </div>
 
-        <div class="form-grid two">
-          <label class="field">
-            <span>세션 이름</span>
+          <div class="versus">VS</div>
+
+          <div class="team team-red">
+            <div>
+              <span id="redTeamNameDisplay">
+                레드팀
+              </span>
+
+              <strong id="redTeamScoreDisplay">
+                0
+              </strong>
+            </div>
+
+            <div class="team-logo">🐯</div>
+          </div>
+
+          <div class="score-progress">
+            <div
+              id="blueScoreBar"
+              class="blue-score-bar"
+            ></div>
+
+            <div
+              id="redScoreBar"
+              class="red-score-bar"
+            ></div>
+          </div>
+        </section>
+
+        <!-- 오늘의 미션 -->
+        <section class="mission-card card">
+          <div>
+            <span class="label">
+              🎯 오늘의 미션
+            </span>
+
+            <h2 id="missionTitle">
+              운동 5개 완료하기
+            </h2>
+
+            <p id="missionDescription">
+              팀원들과 운동을 완료하고 점수를 획득해용.
+            </p>
+          </div>
+
+          <div class="mission-character">
+            🏃
+          </div>
+
+          <div class="mission-progress">
+            <div class="progress-track">
+              <div
+                id="missionProgressBar"
+                class="progress-fill"
+              ></div>
+            </div>
+
+            <strong id="missionProgressText">
+              0 / 5
+            </strong>
+          </div>
+        </section>
+
+        <!-- 현재 운동 -->
+        <section class="current-exercise card">
+          <span class="label">
+            현재 운동
+          </span>
+
+          <div
+            id="currentExerciseImage"
+            class="exercise-big-image"
+          >
+            🏋️
+          </div>
+
+          <h2 id="currentExerciseName">
+            운동을 선택해주세용
+          </h2>
+
+          <p id="currentExerciseTarget">
+            아래 운동 카드 중 하나를 눌러용.
+          </p>
+
+          <div class="timer-box">
+            <span>남은 시간</span>
+
+            <strong id="timerDisplay">
+              00:30
+            </strong>
+          </div>
+
+          <div class="timer-buttons">
+            <button
+              id="startTimerBtn"
+              class="start-btn"
+              type="button"
+            >
+              ▶ 시작
+            </button>
+
+            <button
+              id="pauseTimerBtn"
+              class="dark-btn"
+              type="button"
+            >
+              ⏸ 정지
+            </button>
+
+            <button
+              id="resetTimerBtn"
+              class="dark-btn"
+              type="button"
+            >
+              ↻ 초기화
+            </button>
+          </div>
+        </section>
+
+        <!-- 게임 시작·점수 입력 -->
+        <section class="game-control card">
+          <div class="control-head">
+            <div>
+              <span class="label">
+                게임 진행
+              </span>
+
+              <h2>운동 완료 점수</h2>
+            </div>
+
+            <div class="round-display">
+              ROUND
+              <strong id="roundDisplay">1</strong>
+            </div>
+          </div>
+
+          <label class="simple-field">
+            <span>점수를 받을 팀</span>
+
+            <select id="scoreTeamSelect">
+              <option value="blue">
+                블루팀
+              </option>
+
+              <option value="red">
+                레드팀
+              </option>
+            </select>
+          </label>
+
+          <label class="simple-field">
+            <span>성공 횟수</span>
 
             <input
-              id="sessionTitleInput"
-              type="text"
-              value="오늘의 웨이트 배틀"
-              placeholder="운동 세션 이름"
+              id="repInput"
+              type="number"
+              min="0"
+              value="10"
             />
           </label>
 
-          <label class="field">
-            <span>진행 날짜</span>
+          <div class="score-preview">
+            획득 예정 점수
 
-            <input
-              id="sessionDateInput"
-              type="date"
-            />
-          </label>
-
-          <label class="field">
-            <span>운동 시간</span>
-
-            <div class="input-with-unit">
-              <input
-                id="workSecondsInput"
-                type="number"
-                min="10"
-                max="180"
-                value="40"
-              />
-
-              <b>초</b>
-            </div>
-          </label>
-
-          <label class="field">
-            <span>휴식 시간</span>
-
-            <div class="input-with-unit">
-              <input
-                id="restSecondsInput"
-                type="number"
-                min="5"
-                max="120"
-                value="20"
-              />
-
-              <b>초</b>
-            </div>
-          </label>
-
-          <label class="field">
-            <span>기본 라운드</span>
-
-            <div class="input-with-unit">
-              <input
-                id="roundCountInput"
-                type="number"
-                min="1"
-                max="10"
-                value="3"
-              />
-
-              <b>라운드</b>
-            </div>
-          </label>
-
-          <label class="field">
-            <span>팀당 최대 인원</span>
-
-            <div class="input-with-unit">
-              <input
-                id="maxMembersInput"
-                type="number"
-                min="1"
-                max="10"
-                value="5"
-              />
-
-              <b>명</b>
-            </div>
-          </label>
-        </div>
-      </section>
-
-      <!-- 팀 설정 -->
-      <section class="setup-card">
-        <div class="section-title">
-          <span>02</span>
-
-          <div>
-            <h3>팀 설정</h3>
-            <p>팀을 추가하고 참가자를 등록해용.</p>
+            <strong id="scorePreview">
+              +10점
+            </strong>
           </div>
-        </div>
-
-        <div class="add-row">
-          <input
-            id="newTeamNameInput"
-            type="text"
-            placeholder="팀 이름 입력"
-          />
 
           <button
-            id="addTeamBtn"
-            class="primary-btn"
+            id="completeExerciseBtn"
+            class="game-start-btn"
             type="button"
           >
-            팀 추가
+            ⚡ 운동 완료
           </button>
-        </div>
 
-        <div
-          id="setupTeamList"
-          class="setup-team-list"
-        ></div>
-      </section>
+          <button
+            id="nextRoundBtn"
+            class="next-round-btn"
+            type="button"
+          >
+            다음 라운드
+          </button>
+        </section>
 
-      <!-- 운동 설정 -->
-      <section class="setup-card">
-        <div class="section-title">
-          <span>03</span>
+        <!-- 운동 선택 -->
+        <section class="exercise-select card">
+          <div class="section-head">
+            <div>
+              <span class="label">
+                🏋️ 운동 선택
+              </span>
 
-          <div>
-            <h3>운동 목록</h3>
-            <p>사용할 운동과 점수를 직접 정해용.</p>
+              <h2>오늘의 운동 카드</h2>
+            </div>
+
+            <button
+              id="randomExerciseBtn"
+              class="random-btn"
+              type="button"
+            >
+              🎲 랜덤 선택
+            </button>
           </div>
-        </div>
 
-        <div class="exercise-add-grid">
-          <input
-            id="newExerciseNameInput"
-            type="text"
-            placeholder="운동 이름"
-          />
+          <div
+            id="battleExerciseList"
+            class="exercise-card-list"
+          ></div>
+        </section>
 
-          <select id="newExerciseCategoryInput">
-            <option value="하체">하체</option>
-            <option value="상체">상체</option>
-            <option value="코어">코어</option>
-            <option value="전신">전신</option>
-            <option value="유산소">유산소</option>
-          </select>
+        <!-- 보상 -->
+        <section class="reward-card card">
+          <span class="label">
+            🎁 점수 보상
+          </span>
 
-          <input
-            id="newExerciseTargetInput"
-            type="number"
-            min="1"
-            value="10"
-            placeholder="목표 횟수"
-          />
+          <div class="reward-list">
+            <div class="reward-item">
+              <span>⭐</span>
+              <strong>100점</strong>
+              <small>브론즈</small>
+            </div>
 
-          <input
-            id="newExercisePointsInput"
-            type="number"
-            min="1"
-            value="10"
-            placeholder="점수"
-          />
+            <div class="reward-item">
+              <span>🛡️</span>
+              <strong>300점</strong>
+              <small>실버</small>
+            </div>
+
+            <div class="reward-item">
+              <span>💎</span>
+              <strong>600점</strong>
+              <small>골드</small>
+            </div>
+
+            <div class="reward-item">
+              <span>🏆</span>
+              <strong>1000점</strong>
+              <small>챔피언</small>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- =========================
+         운동 화면
+    ========================== -->
+    <section
+      id="exercisePage"
+      class="page"
+    >
+      <section class="page-card card">
+        <div class="section-head">
+          <div>
+            <span class="label">
+              EXERCISE LIST
+            </span>
+
+            <h2>운동 목록</h2>
+          </div>
 
           <button
             id="addExerciseBtn"
-            class="primary-btn"
+            class="random-btn"
             type="button"
           >
-            운동 추가
+            + 운동 추가
           </button>
         </div>
 
         <div
-          id="setupExerciseList"
-          class="setup-exercise-list"
+          id="allExerciseList"
+          class="all-exercise-list"
         ></div>
       </section>
-    </div>
+    </section>
 
-    <div class="setup-footer">
-      <button
-        id="loadDefaultExercisesBtn"
-        class="secondary-btn"
-        type="button"
-      >
-        기본 운동 불러오기
-      </button>
-
-      <button
-        id="saveSetupBtn"
-        class="primary-btn large-btn"
-        type="button"
-      >
-        설정 저장
-      </button>
-    </div>
-  </aside>
-
-  <!-- =========================
-       메인 콘텐츠
-  ========================== -->
-  <main class="main-content">
     <!-- =========================
-         홈 화면
+         순위 화면
     ========================== -->
     <section
-      id="homeSection"
-      class="tab-section active"
+      id="rankingPage"
+      class="page"
     >
-      <div class="home-grid">
-        <section class="hero-panel panel">
-          <div class="hero-content">
-            <span class="eyebrow">
-              TEAM FITNESS GAME
+      <section class="page-card card">
+        <div class="section-head">
+          <div>
+            <span class="label">
+              LIVE RANKING
             </span>
 
-            <h2>
-              운동을 게임처럼,
-              <br />
-              팀과 함께 즐겨용!
-            </h2>
-
-            <p>
-              서킷, 주사위, 카드, 빙고, 협동 미션을
-              한 프로그램에서 진행할 수 있어용.
-            </p>
-
-            <div class="hero-actions">
-              <button
-                id="quickStartCircuitBtn"
-                class="primary-btn hero-btn"
-                type="button"
-              >
-                서킷 바로 시작
-              </button>
-
-              <button
-                id="quickRandomGameBtn"
-                class="secondary-btn hero-btn"
-                type="button"
-              >
-                랜덤 게임
-              </button>
-            </div>
+            <h2>팀 순위</h2>
           </div>
-
-          <div class="hero-visual">
-            <div class="battle-ring">
-              <div class="battle-center">
-                <span>FIT</span>
-                <strong>BATTLE</strong>
-              </div>
-
-              <div class="floating-badge badge-one">
-                +10
-              </div>
-
-              <div class="floating-badge badge-two">
-                MVP
-              </div>
-
-              <div class="floating-badge badge-three">
-                3 ROUND
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel current-session-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                CURRENT SESSION
-              </span>
-
-              <h3>현재 운동 정보</h3>
-            </div>
-          </div>
-
-          <div class="session-summary-grid">
-            <div class="summary-box">
-              <span>등록 팀</span>
-              <strong id="homeTeamCount">0</strong>
-            </div>
-
-            <div class="summary-box">
-              <span>참가자</span>
-              <strong id="homeParticipantCount">0</strong>
-            </div>
-
-            <div class="summary-box">
-              <span>운동 목록</span>
-              <strong id="homeExerciseCount">0</strong>
-            </div>
-
-            <div class="summary-box">
-              <span>진행 라운드</span>
-              <strong id="homeRoundCount">3</strong>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel mode-select-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                GAME MODES
-              </span>
-
-              <h3>게임 모드 선택</h3>
-            </div>
-          </div>
-
-          <div class="mode-card-grid">
-            <button
-              class="mode-card"
-              type="button"
-              data-open-tab="circuitSection"
-            >
-              <span class="mode-icon">⏱️</span>
-              <strong>팀 서킷</strong>
-              <p>
-                운동과 휴식을 반복하며 팀 점수를 쌓아용.
-              </p>
-            </button>
-
-            <button
-              class="mode-card"
-              type="button"
-              data-open-tab="randomSection"
-            >
-              <span class="mode-icon">🎲</span>
-              <strong>랜덤 게임</strong>
-              <p>
-                주사위와 카드로 운동을 무작위 선택해용.
-              </p>
-            </button>
-
-            <button
-              class="mode-card"
-              type="button"
-              data-open-tab="bingoSection"
-            >
-              <span class="mode-icon">🎯</span>
-              <strong>운동 빙고</strong>
-              <p>
-                운동 미션을 완료해 빙고를 만들어요.
-              </p>
-            </button>
-
-            <button
-              class="mode-card"
-              type="button"
-              data-open-tab="missionSection"
-            >
-              <span class="mode-icon">🤝</span>
-              <strong>협동 미션</strong>
-              <p>
-                팀 전체가 목표 횟수를 나눠서 완성해용.
-              </p>
-            </button>
-          </div>
-        </section>
-
-        <section class="panel live-ranking-preview">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                LIVE RANKING
-              </span>
-
-              <h3>실시간 팀 순위</h3>
-            </div>
-
-            <button
-              class="text-btn"
-              type="button"
-              data-open-tab="rankingSection"
-            >
-              전체 보기
-            </button>
-          </div>
-
-          <div
-            id="homeRankingList"
-            class="ranking-list"
-          >
-            <div class="empty-message">
-              팀을 등록하면 순위가 표시돼용.
-            </div>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <!-- =========================
-         팀 서킷 화면
-    ========================== -->
-    <section
-      id="circuitSection"
-      class="tab-section"
-    >
-      <div class="circuit-layout">
-        <aside class="panel circuit-sidebar">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                CIRCUIT CONTROL
-              </span>
-
-              <h3>서킷 설정</h3>
-            </div>
-          </div>
-
-          <label class="field">
-            <span>진행 팀</span>
-
-            <select id="circuitTeamSelect">
-              <option value="">팀 선택</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>운동 순서</span>
-
-            <select id="circuitExerciseOrder">
-              <option value="normal">
-                등록 순서
-              </option>
-
-              <option value="random">
-                무작위 순서
-              </option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>라운드 수</span>
-
-            <input
-              id="circuitRoundInput"
-              type="number"
-              min="1"
-              max="10"
-              value="3"
-            />
-          </label>
-
-          <div class="circuit-side-buttons">
-            <button
-              id="prepareCircuitBtn"
-              class="primary-btn"
-              type="button"
-            >
-              서킷 준비
-            </button>
-
-            <button
-              id="stopCircuitBtn"
-              class="danger-btn"
-              type="button"
-            >
-              서킷 종료
-            </button>
-          </div>
-
-          <div class="safety-box">
-            <strong>안전 규칙</strong>
-
-            <p>
-              무게보다 정확한 자세를 우선하고,
-              통증이 있으면 즉시 중단해용.
-            </p>
-          </div>
-        </aside>
-
-        <section class="panel circuit-main-panel">
-          <div class="circuit-status-row">
-            <div>
-              <span>현재 라운드</span>
-
-              <strong id="currentRoundDisplay">
-                0 / 3
-              </strong>
-            </div>
-
-            <div>
-              <span>운동 번호</span>
-
-              <strong id="currentExerciseNumber">
-                0 / 0
-              </strong>
-            </div>
-
-            <div>
-              <span>현재 상태</span>
-
-              <strong id="circuitPhaseDisplay">
-                준비
-              </strong>
-            </div>
-          </div>
-
-          <div class="exercise-display-card">
-            <span
-              id="currentExerciseCategory"
-              class="exercise-category"
-            >
-              운동 대기
-            </span>
-
-            <h2 id="currentExerciseName">
-              서킷을 준비해주세용
-            </h2>
-
-            <p id="currentExerciseTarget">
-              목표 횟수와 설명이 여기에 표시돼용.
-            </p>
-
-            <div
-              id="circuitTimer"
-              class="main-timer"
-            >
-              00:40
-            </div>
-
-            <div class="timer-progress">
-              <div
-                id="circuitTimerBar"
-                class="timer-progress-bar"
-              ></div>
-            </div>
-          </div>
-
-          <div class="timer-control-grid">
-            <button
-              id="startCircuitTimerBtn"
-              class="primary-btn large-btn"
-              type="button"
-            >
-              시작
-            </button>
-
-            <button
-              id="pauseCircuitTimerBtn"
-              class="secondary-btn large-btn"
-              type="button"
-            >
-              일시정지
-            </button>
-
-            <button
-              id="nextCircuitExerciseBtn"
-              class="secondary-btn large-btn"
-              type="button"
-            >
-              다음 운동
-            </button>
-          </div>
-
-          <div class="score-entry-panel">
-            <div class="panel-head">
-              <div>
-                <span class="eyebrow">
-                  SCORE ENTRY
-                </span>
-
-                <h3>운동 결과 입력</h3>
-              </div>
-            </div>
-
-            <div class="score-entry-grid">
-              <label class="field">
-                <span>선수</span>
-
-                <select id="circuitParticipantSelect">
-                  <option value="">선수 선택</option>
-                </select>
-              </label>
-
-              <label class="field">
-                <span>성공 횟수</span>
-
-                <input
-                  id="successfulRepsInput"
-                  type="number"
-                  min="0"
-                  value="0"
-                />
-              </label>
-
-              <label class="field">
-                <span>자세 불량 제외</span>
-
-                <input
-                  id="invalidRepsInput"
-                  type="number"
-                  min="0"
-                  value="0"
-                />
-              </label>
-
-              <label class="field">
-                <span>보너스 점수</span>
-
-                <input
-                  id="bonusScoreInput"
-                  type="number"
-                  min="0"
-                  value="0"
-                />
-              </label>
-            </div>
-
-            <div class="calculated-score">
-              <span>예상 획득 점수</span>
-
-              <strong id="calculatedScoreDisplay">
-                0점
-              </strong>
-            </div>
-
-            <button
-              id="saveCircuitScoreBtn"
-              class="primary-btn full-btn"
-              type="button"
-            >
-              점수 저장
-            </button>
-          </div>
-        </section>
-
-        <aside class="panel circuit-queue-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                EXERCISE QUEUE
-              </span>
-
-              <h3>운동 순서</h3>
-            </div>
-          </div>
-
-          <div
-            id="circuitExerciseQueue"
-            class="exercise-queue"
-          >
-            <div class="empty-message">
-              서킷을 준비하면 운동 순서가 표시돼용.
-            </div>
-          </div>
-
-          <div class="current-team-score">
-            <span>현재 팀 점수</span>
-
-            <strong id="circuitTeamScoreDisplay">
-              0점
-            </strong>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- index.html 2부에서 계속 -->
-        <!-- =========================
-         랜덤 게임 화면
-    ========================== -->
-    <section
-      id="randomSection"
-      class="tab-section"
-    >
-      <div class="random-layout">
-        <section class="panel random-main-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                RANDOM FITNESS
-              </span>
-
-              <h2>랜덤 운동 게임</h2>
-            </div>
-
-            <select id="randomTeamSelect">
-              <option value="">진행 팀 선택</option>
-            </select>
-          </div>
-
-          <div class="random-mode-tabs">
-            <button
-              id="diceModeBtn"
-              class="random-mode-btn active"
-              type="button"
-              data-random-mode="dice"
-            >
-              🎲 주사위
-            </button>
-
-            <button
-              id="cardModeBtn"
-              class="random-mode-btn"
-              type="button"
-              data-random-mode="card"
-            >
-              🃏 운동 카드
-            </button>
-          </div>
-
-          <div class="random-display">
-            <div
-              id="randomObjectDisplay"
-              class="random-object"
-            >
-              🎲
-            </div>
-
-            <span
-              id="randomExerciseCategory"
-              class="exercise-category"
-            >
-              랜덤 대기
-            </span>
-
-            <h2 id="randomExerciseName">
-              버튼을 눌러 운동을 뽑아용
-            </h2>
-
-            <p id="randomExerciseTarget">
-              운동 이름과 목표 횟수가 표시돼용.
-            </p>
-
-            <strong id="randomExercisePoints">
-              0점
-            </strong>
-          </div>
-
-          <button
-            id="drawRandomExerciseBtn"
-            class="primary-btn random-draw-btn"
-            type="button"
-          >
-            랜덤 운동 뽑기
-          </button>
-
-          <div class="random-score-entry">
-            <label class="field">
-              <span>참가자</span>
-
-              <select id="randomParticipantSelect">
-                <option value="">선수 선택</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <span>성공 횟수</span>
-
-              <input
-                id="randomSuccessfulRepsInput"
-                type="number"
-                min="0"
-                value="0"
-              />
-            </label>
-
-            <label class="field">
-              <span>자세 불량 제외</span>
-
-              <input
-                id="randomInvalidRepsInput"
-                type="number"
-                min="0"
-                value="0"
-              />
-            </label>
-
-            <label class="field">
-              <span>보너스 점수</span>
-
-              <input
-                id="randomBonusInput"
-                type="number"
-                min="0"
-                value="0"
-              />
-            </label>
-
-            <button
-              id="saveRandomScoreBtn"
-              class="primary-btn"
-              type="button"
-            >
-              랜덤 점수 저장
-            </button>
-          </div>
-        </section>
-
-        <aside class="panel random-history-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                RANDOM HISTORY
-              </span>
-
-              <h3>최근 랜덤 기록</h3>
-            </div>
-
-            <button
-              id="clearRandomHistoryBtn"
-              class="text-btn"
-              type="button"
-            >
-              지우기
-            </button>
-          </div>
-
-          <div
-            id="randomHistoryList"
-            class="random-history-list"
-          >
-            <div class="empty-message">
-              아직 랜덤 운동 기록이 없어용.
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- =========================
-         운동 빙고 화면
-    ========================== -->
-    <section
-      id="bingoSection"
-      class="tab-section"
-    >
-      <div class="bingo-layout">
-        <aside class="panel bingo-control-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                FITNESS BINGO
-              </span>
-
-              <h3>빙고 설정</h3>
-            </div>
-          </div>
-
-          <label class="field">
-            <span>진행 팀</span>
-
-            <select id="bingoTeamSelect">
-              <option value="">팀 선택</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>빙고 크기</span>
-
-            <select id="bingoSizeSelect">
-              <option value="3">3 × 3</option>
-              <option value="4">4 × 4</option>
-              <option value="5">5 × 5</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>빙고 1줄 보너스</span>
-
-            <div class="input-with-unit">
-              <input
-                id="bingoBonusInput"
-                type="number"
-                min="0"
-                value="30"
-              />
-
-              <b>점</b>
-            </div>
-          </label>
-
-          <button
-            id="createBingoBoardBtn"
-            class="primary-btn full-btn"
-            type="button"
-          >
-            새 빙고판 만들기
-          </button>
-
-          <button
-            id="resetBingoBoardBtn"
-            class="danger-btn full-btn"
-            type="button"
-          >
-            빙고 초기화
-          </button>
-
-          <div class="bingo-status-card">
-            <span>완성한 빙고</span>
-
-            <strong id="completedBingoCount">
-              0줄
-            </strong>
-          </div>
-        </aside>
-
-        <section class="panel bingo-main-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                BINGO BOARD
-              </span>
-
-              <h2 id="bingoTeamTitle">
-                팀을 선택해주세용
-              </h2>
-            </div>
-
-            <div class="bingo-score">
-              <span>팀 점수</span>
-              <strong id="bingoTeamScore">0점</strong>
-            </div>
-          </div>
-
-          <div
-            id="bingoBoard"
-            class="bingo-board size-3"
-          >
-            <div class="empty-message">
-              새 빙고판을 만들어주세용.
-            </div>
-          </div>
-
-          <div class="bingo-help">
-            운동을 완료하면 칸을 눌러 체크해용.
-            빙고가 완성되면 보너스 점수가 자동으로 추가돼용.
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <!-- =========================
-         협동 미션 화면
-    ========================== -->
-    <section
-      id="missionSection"
-      class="tab-section"
-    >
-      <div class="mission-layout">
-        <aside class="panel mission-control-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                TEAM MISSION
-              </span>
-
-              <h3>협동 미션 설정</h3>
-            </div>
-          </div>
-
-          <label class="field">
-            <span>진행 팀</span>
-
-            <select id="missionTeamSelect">
-              <option value="">팀 선택</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>운동 선택</span>
-
-            <select id="missionExerciseSelect">
-              <option value="">운동 선택</option>
-            </select>
-          </label>
-
-          <label class="field">
-            <span>팀 전체 목표</span>
-
-            <div class="input-with-unit">
-              <input
-                id="missionTargetInput"
-                type="number"
-                min="1"
-                value="100"
-              />
-
-              <b>회</b>
-            </div>
-          </label>
-
-          <label class="field">
-            <span>완료 보너스</span>
-
-            <div class="input-with-unit">
-              <input
-                id="missionBonusInput"
-                type="number"
-                min="0"
-                value="50"
-              />
-
-              <b>점</b>
-            </div>
-          </label>
-
-          <button
-            id="startMissionBtn"
-            class="primary-btn full-btn"
-            type="button"
-          >
-            협동 미션 시작
-          </button>
-
-          <button
-            id="resetMissionBtn"
-            class="danger-btn full-btn"
-            type="button"
-          >
-            미션 초기화
-          </button>
-        </aside>
-
-        <section class="panel mission-main-panel">
-          <div class="mission-header">
-            <div>
-              <span
-                id="missionCategoryDisplay"
-                class="exercise-category"
-              >
-                미션 대기
-              </span>
-
-              <h2 id="missionExerciseDisplay">
-                협동 미션을 시작해주세용
-              </h2>
-            </div>
-
-            <div class="mission-team-name">
-              <span>진행 팀</span>
-              <strong id="missionTeamDisplay">-</strong>
-            </div>
-          </div>
-
-          <div class="mission-progress-card">
-            <div class="mission-number">
-              <strong id="missionCurrentReps">
-                0
-              </strong>
-
-              <span>
-                /
-                <b id="missionTargetDisplay">100</b>
-                회
-              </span>
-            </div>
-
-            <div class="mission-progress">
-              <div
-                id="missionProgressBar"
-                class="mission-progress-bar"
-              ></div>
-            </div>
-
-            <p id="missionProgressText">
-              0% 완료
-            </p>
-          </div>
-
-          <div class="mission-entry-grid">
-            <label class="field">
-              <span>참가자</span>
-
-              <select id="missionParticipantSelect">
-                <option value="">선수 선택</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <span>추가 성공 횟수</span>
-
-              <input
-                id="missionRepsInput"
-                type="number"
-                min="1"
-                value="10"
-              />
-            </label>
-
-            <button
-              id="addMissionRepsBtn"
-              class="primary-btn"
-              type="button"
-            >
-              횟수 추가
-            </button>
-          </div>
-
-          <div class="mission-member-list-wrap">
-            <h3>참가자별 기여도</h3>
-
-            <div
-              id="missionMemberList"
-              class="mission-member-list"
-            >
-              <div class="empty-message">
-                미션을 시작하면 기여도가 표시돼용.
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <!-- =========================
-         실시간 순위 화면
-    ========================== -->
-    <section
-      id="rankingSection"
-      class="tab-section"
-    >
-      <div class="ranking-page-grid">
-        <section class="panel team-ranking-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                TEAM RANKING
-              </span>
-
-              <h2>실시간 팀 순위</h2>
-            </div>
-
-            <button
-              id="resetScoresBtn"
-              class="danger-btn"
-              type="button"
-            >
-              점수 초기화
-            </button>
-          </div>
-
-          <div
-            id="teamRankingList"
-            class="big-ranking-list"
-          >
-            <div class="empty-message">
-              등록된 팀이 없습니다.
-            </div>
-          </div>
-        </section>
-
-        <section class="panel participant-ranking-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                PLAYER RANKING
-              </span>
-
-              <h2>개인 순위</h2>
-            </div>
-          </div>
-
-          <div
-            id="participantRankingList"
-            class="participant-ranking-list"
-          >
-            <div class="empty-message">
-              참가자 기록이 없습니다.
-            </div>
-          </div>
-        </section>
-
-        <section class="panel award-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                TODAY'S AWARDS
-              </span>
-
-              <h2>오늘의 수상자</h2>
-            </div>
-          </div>
-
-          <div class="award-grid">
-            <div class="award-card gold">
-              <span>🏆</span>
-              <small>우승 팀</small>
-              <strong id="winnerTeamDisplay">
-                기록 없음
-              </strong>
-            </div>
-
-            <div class="award-card">
-              <span>⭐</span>
-              <small>개인 MVP</small>
-              <strong id="mvpParticipantDisplay">
-                기록 없음
-              </strong>
-            </div>
-
-            <div class="award-card">
-              <span>🔥</span>
-              <small>최다 성공 횟수</small>
-              <strong id="mostRepsDisplay">
-                기록 없음
-              </strong>
-            </div>
-
-            <div class="award-card">
-              <span>🎯</span>
-              <small>최고 자세 점수</small>
-              <strong id="bestFormDisplay">
-                기록 없음
-              </strong>
-            </div>
-          </div>
-        </section>
-      </div>
+        </div>
+
+        <div
+          id="rankingList"
+          class="ranking-list"
+        ></div>
+      </section>
     </section>
 
     <!-- =========================
          기록 화면
     ========================== -->
     <section
-      id="recordSection"
-      class="tab-section"
+      id="recordPage"
+      class="page"
     >
-      <div class="record-page-grid">
-        <section class="panel record-table-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                SESSION RECORDS
-              </span>
+      <section class="page-card card">
+        <div class="section-head">
+          <div>
+            <span class="label">
+              GAME RECORD
+            </span>
 
-              <h2>전체 운동 기록</h2>
-            </div>
-
-            <div class="record-actions">
-              <select id="recordTeamFilter">
-                <option value="all">
-                  전체 팀
-                </option>
-              </select>
-
-              <select id="recordModeFilter">
-                <option value="all">
-                  전체 모드
-                </option>
-
-                <option value="circuit">
-                  서킷
-                </option>
-
-                <option value="random">
-                  랜덤
-                </option>
-
-                <option value="bingo">
-                  빙고
-                </option>
-
-                <option value="mission">
-                  협동
-                </option>
-              </select>
-
-              <button
-                id="exportCsvBtn"
-                class="secondary-btn"
-                type="button"
-              >
-                CSV 저장
-              </button>
-            </div>
-          </div>
-
-          <div class="table-wrap">
-            <table class="record-table">
-              <thead>
-                <tr>
-                  <th>시간</th>
-                  <th>모드</th>
-                  <th>팀</th>
-                  <th>참가자</th>
-                  <th>운동</th>
-                  <th>성공</th>
-                  <th>자세 제외</th>
-                  <th>보너스</th>
-                  <th>획득 점수</th>
-                </tr>
-              </thead>
-
-              <tbody id="recordTableBody">
-                <tr>
-                  <td
-                    colspan="9"
-                    class="empty-cell"
-                  >
-                    저장된 운동 기록이 없습니다.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="panel participant-detail-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                PLAYER DETAIL
-              </span>
-
-              <h3>참가자 상세 기록</h3>
-            </div>
-
-            <select id="recordParticipantSelect">
-              <option value="">참가자 선택</option>
-            </select>
-          </div>
-
-          <div
-            id="participantDetailCard"
-            class="participant-detail-card"
-          >
-            <div class="empty-message">
-              참가자를 선택해주세용.
-            </div>
-          </div>
-        </section>
-
-        <section class="panel saved-session-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                SAVED SESSIONS
-              </span>
-
-              <h3>저장된 운동 세션</h3>
-            </div>
-
-            <div class="saved-data-actions">
-              <button
-                id="exportJsonBtn"
-                class="secondary-btn"
-                type="button"
-              >
-                백업
-              </button>
-
-              <label class="file-btn">
-                불러오기
-
-                <input
-                  id="importJsonInput"
-                  type="file"
-                  accept=".json,application/json"
-                />
-              </label>
-            </div>
-          </div>
-
-          <div
-            id="savedSessionList"
-            class="saved-session-list"
-          >
-            <div class="empty-message">
-              저장된 세션이 없습니다.
-            </div>
-          </div>
-        </section>
-
-        <section class="panel safety-record-panel">
-          <div class="panel-head">
-            <div>
-              <span class="eyebrow">
-                SAFETY CHECK
-              </span>
-
-              <h3>운동 전 안전 확인</h3>
-            </div>
-          </div>
-
-          <div class="safety-check-list">
-            <label>
-              <input
-                id="warmupCheck"
-                type="checkbox"
-              />
-              충분히 준비운동을 했어용.
-            </label>
-
-            <label>
-              <input
-                id="spaceCheck"
-                type="checkbox"
-              />
-              운동 공간과 기구 상태를 확인했어용.
-            </label>
-
-            <label>
-              <input
-                id="weightCheck"
-                type="checkbox"
-              />
-              무리하지 않는 무게를 선택했어용.
-            </label>
-
-            <label>
-              <input
-                id="painCheck"
-                type="checkbox"
-              />
-              통증이 생기면 즉시 중단하도록 안내했어용.
-            </label>
+            <h2>운동 기록</h2>
           </div>
 
           <button
-            id="saveSafetyCheckBtn"
-            class="primary-btn full-btn"
+            id="clearRecordsBtn"
+            class="danger-btn"
             type="button"
           >
-            안전 확인 저장
+            기록 초기화
           </button>
+        </div>
 
-          <p id="safetyCheckStatus">
-            아직 안전 확인을 저장하지 않았어용.
-          </p>
-        </section>
-      </div>
+        <div
+          id="recordList"
+          class="record-list"
+        ></div>
+      </section>
     </section>
   </main>
 
   <!-- =========================
-       알림·효과
+       설정 팝업
   ========================== -->
   <div
-    id="toast"
-    class="toast"
-    role="status"
-  ></div>
-
-  <div
-    id="countdownOverlay"
-    class="countdown-overlay"
+    id="setupModal"
+    class="modal"
   >
-    <strong id="countdownNumber">3</strong>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <span class="label">
+            GAME SETUP
+          </span>
+
+          <h2>간단 설정</h2>
+        </div>
+
+        <button
+          id="closeSetupBtn"
+          class="close-btn"
+          type="button"
+        >
+          ✕
+        </button>
+      </div>
+
+      <label class="simple-field">
+        <span>블루팀 이름</span>
+
+        <input
+          id="blueTeamNameInput"
+          type="text"
+          value="블루팀"
+        />
+      </label>
+
+      <label class="simple-field">
+        <span>레드팀 이름</span>
+
+        <input
+          id="redTeamNameInput"
+          type="text"
+          value="레드팀"
+        />
+      </label>
+
+      <label class="simple-field">
+        <span>운동 시간</span>
+
+        <select id="timerSecondsInput">
+          <option value="20">20초</option>
+          <option value="30" selected>30초</option>
+          <option value="40">40초</option>
+          <option value="60">60초</option>
+        </select>
+      </label>
+
+      <label class="simple-field">
+        <span>미션 목표</span>
+
+        <select id="missionTargetInput">
+          <option value="3">운동 3개</option>
+          <option value="5" selected>운동 5개</option>
+          <option value="10">운동 10개</option>
+        </select>
+      </label>
+
+      <button
+        id="saveSetupBtn"
+        class="game-start-btn"
+        type="button"
+      >
+        설정 저장
+      </button>
+
+      <button
+        id="resetGameBtn"
+        class="danger-btn full-btn"
+        type="button"
+      >
+        전체 게임 초기화
+      </button>
+    </div>
   </div>
 
+  <!-- =========================
+       운동 추가 팝업
+  ========================== -->
   <div
-    id="celebrationOverlay"
-    class="celebration-overlay"
+    id="exerciseModal"
+    class="modal"
   >
-    <div class="celebration-card">
-      <span>🏆</span>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <span class="label">
+            NEW EXERCISE
+          </span>
 
-      <h2 id="celebrationTitle">
-        미션 완료!
+          <h2>운동 추가</h2>
+        </div>
+
+        <button
+          id="closeExerciseModalBtn"
+          class="close-btn"
+          type="button"
+        >
+          ✕
+        </button>
+      </div>
+
+      <label class="simple-field">
+        <span>운동 이름</span>
+
+        <input
+          id="newExerciseNameInput"
+          type="text"
+          placeholder="예: 사이드 스텝"
+        />
+      </label>
+
+      <label class="simple-field">
+        <span>운동 그림</span>
+
+        <select id="newExerciseImageInput">
+          <option value="🏋️">🏋️ 웨이트</option>
+          <option value="🦵">🦵 하체</option>
+          <option value="💪">💪 상체</option>
+          <option value="🏃">🏃 달리기</option>
+          <option value="🤸">🤸 전신</option>
+          <option value="🧘">🧘 코어</option>
+        </select>
+      </label>
+
+      <label class="simple-field">
+        <span>목표 횟수</span>
+
+        <input
+          id="newExerciseTargetInput"
+          type="number"
+          min="1"
+          value="10"
+        />
+      </label>
+
+      <label class="simple-field">
+        <span>기본 점수</span>
+
+        <input
+          id="newExercisePointsInput"
+          type="number"
+          min="1"
+          value="10"
+        />
+      </label>
+
+      <button
+        id="saveExerciseBtn"
+        class="game-start-btn"
+        type="button"
+      >
+        운동 추가
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================
+       완료 효과
+  ========================== -->
+  <div
+    id="successOverlay"
+    class="success-overlay"
+  >
+    <div class="success-card">
+      <div class="success-icon">🏆</div>
+
+      <h2 id="successTitle">
+        운동 완료!
       </h2>
 
-      <p id="celebrationText">
-        보너스 점수를 획득했어용.
+      <p id="successText">
+        점수를 획득했어용.
       </p>
 
       <button
-        id="closeCelebrationBtn"
-        class="primary-btn"
+        id="closeSuccessBtn"
+        class="game-start-btn"
         type="button"
       >
         확인
@@ -1649,15 +655,10 @@
     </div>
   </div>
 
-  <audio
-    id="startSound"
-    preload="auto"
-  ></audio>
-
-  <audio
-    id="finishSound"
-    preload="auto"
-  ></audio>
+  <div
+    id="toast"
+    class="toast"
+  ></div>
 
   <script src="app.js"></script>
 </body>
